@@ -73,3 +73,25 @@ class LoginView(APIView):
         return Response(
             {"error": "Invalid password"}, status=status.HTTP_400_BAD_REQUEST
         )
+
+class LogoutView(APIView):
+    @swagger_auto_schema(
+        operation_summary="Logout",
+        responses={200: "OK", 400: "Bad Request"},
+    )
+    def post(self, request):
+        return Response(
+            {"message": "User logged out successfully."}, status=status.HTTP_200_OK
+        )
+    
+class RetrieveUser(APIView):
+    @swagger_auto_schema(
+        operation_summary="Retrieve User",
+        responses={200: "OK", 400: "Bad Request"},
+    )
+    def get(self, request):
+        user = request.user
+        user_profile = UserProfile.objects.get(user=user)
+        return Response(
+            {"user": user, "profile": user_profile}, status=status.HTTP_200_OK
+        )
