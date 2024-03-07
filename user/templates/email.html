@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
+    <title>Welcome to Purposeify</title>
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #193352;
+            font-size: 24px;
+        }
+
+        .header h1 span {
+            font-weight: 600;
+        }
+
+        .card {
+            background-color: #eaf0f3;
+            padding: 20px;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .card-content p {
+            margin: 15px 0;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .card-content a {
+            color: #2375e2;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .image-row {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .footer p {
+            color: #666;
+            font-size: 14px;
+            text-align: center;
+            margin: 4px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <svg xmlns="http://www.w3.org/2000/svg" width="94" height="100" viewBox="0 0 94 136" fill="none">
+                <!-- SVG content -->
+            </svg>
+            <h1>Hi <span>{{first_name}}</span></h1>
+            <h1>Welcome to Purposeify</h1>
+        </div>
+
+        <div class="card">
+            <img src="https://app.purposeify.com/images/Robot.png" alt="Card Image" />
+            <div class="card-content">
+                {% if type == 'verification' %}
+                    <p>Please verify your email address</p>
+                    <p>Please click on the following link to verify your email address.</p>
+                    <p><a href="{{link}}">Verify Email</a></p>
+                {% else%}
+                    <p>Password Reset Request</p>
+                    <p>Please click on the following link to reset your password.</p>
+                    <p><a href="{{link}}">Reset Password</a></p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="image-row">
+            <a href="https://www.facebook.com/profile.php?id=61554874950454&mibextid=LQQJ4d" target="_blank">
+                <i class="fab fa-facebook-square" style="font-size: 50px; color: #4267B2; padding-right: 10px;"></i>
+            </a>
+            <a href="https://www.instagram.com/purposeify/" target="_blank">
+                <i class="fab fa-instagram-square" style="font-size: 50px; color: #C13584;"></i>
+            </a>
+        </div>
+
+        <div class="footer">
+            <p>Copyright &copy; 2024 Purposeify</p>
+            <p>It takes a village to raise a child</p>
+        </div>
+    </div>
+</body>
+
+</html>
