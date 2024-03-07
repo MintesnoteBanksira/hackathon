@@ -9,6 +9,7 @@ from .models import UserProfile
 from drf_yasg.utils import swagger_auto_schema
 from .utils import generate_jwt_token, send_mail
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 from django.db import IntegrityError
 @method_decorator(csrf_exempt, name="dispatch")
@@ -46,4 +47,29 @@ class RegisterAPIView(APIView):
         print("User serializer is not valid")  # Debug print
         return Response(
             user_serializer.errors, status=status.HTTP_400_BAD_REQUEST
+        )
+    
+class LoginView(APIView):
+    @swagger_auto_schema(
+        operation_summary="Login",
+        request_body=UserSerializer,
+        responses={200: "OK", 400: "Bad Request"},
+    )
+    def post(self, request):
+        username = request.data.get("username")
+        password = request.data.get("password")
+        try:
+            user = User.objects.get(username=username)
+            user_profile = UserProfile.objects.get(user=user)
+        except User.DoesNotExist:
+            return Response(
+                {"error": "User does not exist"}, status=status.HTTP_404_NOT_FOUND
+            )
+        if user.check_password(password):
+            token = generate_jwt_token(user)
+            return Response(
+                {"token": token , "user":user_profile}, status=status.HTTP_200_OK
+            )
+        return Response(
+            {"error": "Invalid password"}, status=status.HTTP_400_BAD_REQUEST
         )
