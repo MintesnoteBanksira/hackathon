@@ -12,6 +12,10 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 from django.db import IntegrityError
+class HomepageView(APIView):
+    @swagger_auto_schema(operation_summary="Homepage")
+    def get(self, request):
+        return Response({"message": "Welcome to Avenna"}, status=status.HTTP_200_OK)
 @method_decorator(csrf_exempt, name="dispatch")
 class RegisterAPIView(APIView):
     @swagger_auto_schema(
